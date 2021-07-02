@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:renda_machine/entity/score.dart';
@@ -120,12 +122,16 @@ class SelectTimes extends ChangeNotifier {
         .snapshots();
 
     tenSnapshots.listen((snapshot) {
+      tenTapNumber = "0";
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         print(nickName);
         if (name == nickName) {
-          tenTapNumber = scores.data()['score'].toString();
+          int kTenTapNumber = scores.data()['score'];
+          if (kTenTapNumber > int.parse(tenTapNumber)) {
+            tenTapNumber = kTenTapNumber.toString();
+          }
         }
       }
     });
@@ -136,11 +142,15 @@ class SelectTimes extends ChangeNotifier {
         .snapshots();
 
     sixtySnapshots.listen((snapshot) {
+      sixtyTapNumber = "0";
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (name == nickName) {
-          sixtyTapNumber = scores.data()['score'].toString();
+          int kSixtyTapNumber = scores.data()['score'];
+          if (kSixtyTapNumber > int.parse(sixtyTapNumber)) {
+            sixtyTapNumber = kSixtyTapNumber.toString();
+          }
         }
       }
     });
@@ -151,18 +161,19 @@ class SelectTimes extends ChangeNotifier {
         .snapshots();
 
     endlessSnapshots.listen((snapshot) {
+      endlessTapNumber = "0";
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (name == nickName) {
-          endlessTapNumber = scores.data()['score'].toString();
-        } 
+          int kEndlessTapNumber = scores.data()['score'];
+          if (kEndlessTapNumber > int.parse(endlessTapNumber)) {
+            endlessTapNumber = kEndlessTapNumber.toString();
+          }
+        }
       }
     });
-
-
   }
-
 
   // Future<void> setPrefItems() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
