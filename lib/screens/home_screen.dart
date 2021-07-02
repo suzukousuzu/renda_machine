@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 Center(
                   child: Text(
-                    "Renda",
+                    "Renda ",
                     style: KTitleTextStyle,
                   ),
                 ),
