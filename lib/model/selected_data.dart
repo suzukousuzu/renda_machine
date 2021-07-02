@@ -53,53 +53,16 @@ class SelectTimes extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   void updateDisplay() {
     this.nickName = nickName;
-    if( this.nickName == "") {
+    if (this.nickName == "") {
       buttonDisplay = false;
     } else {
       buttonDisplay = true;
     }
     notifyListeners();
-
-    }
-
-
-
-
-  // void fetchName() async{
-  //   final score = await FirebaseFirestore.instance.collection('Score').get();
-  //   final docs = score.docs;
-  //   for(var score in docs) {
-  //     print(score.data());
-  //   }
-  // final name = docs.docs.map((doc) => Score(name:doc['name'])).toList();
-  // this.name= name;
-  //   final docs = message.docs;
-  //   for(var message in docs) {
-  //     print(message.data());
-  //   }
-
-  // Future<QuerySnapshot> fetchName() async {
-  //   final score = await _firestore.collection('scores').orderBy('score',descending: true).get();
-  //   final docs = score.docs;
-  //   for (var scores in docs) {
-  //     final nickName = await scores.data()['name'];
-  //     final tapScore = await scores.data()['score'];
-  //     if(nickName != "") {
-  //       indexNumber += 1;
-  //       final scoreBunddle =  ScoreBunddle(nickName: nickName,score: tapScore,indexNumber: indexNumber,);
-  //       scoreBubbles.add(scoreBunddle);
-  //     }
-  //   }
-  //
-  //   // final names = docs.map((doc) => Score(name: doc['name'])).toList();
-  //   // final scores = docs.map((doc) => Score(score: doc['score'])).toList();
-  //   // this.names = names;
-  //   // this.scores = scores;
-  //
-  //   notifyListeners();
-  // }
+  }
 
   void fetchName() {
     scoreBubbles = [];
@@ -109,14 +72,12 @@ class SelectTimes extends ChangeNotifier {
           .collection('scores')
           .orderBy('score', descending: true)
           .snapshots();
-    }
-    else if (selectCard == Select.sixtySeconds) {
+    } else if (selectCard == Select.sixtySeconds) {
       snapshots = _firestore
           .collection('sixtyScores')
           .orderBy('score', descending: true)
           .snapshots();
-    }
-    else if (selectCard == Select.endless) {
+    } else if (selectCard == Select.endless) {
       snapshots = _firestore
           .collection('endlessScores')
           .orderBy('score', descending: true)
@@ -130,9 +91,9 @@ class SelectTimes extends ChangeNotifier {
         final nickName = scores.data()['name'];
         final tapScore = scores.data()['score'];
         print(nickName);
-        if(nickName != null) {
+        if (nickName != null) {
           if (nickName != "") {
-            if(indexNumber <= 4) {
+            if (indexNumber <= 4) {
               indexNumber += 1;
               print(indexNumber);
               final scoreBunddle = ScoreBunddle(
@@ -149,15 +110,69 @@ class SelectTimes extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future <void> setPrefItems() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('counter',  int.parse(endlessTapNumber));
+  void fetchScore(String name) {
+    Stream<QuerySnapshot> tenSnapshots;
+    Stream<QuerySnapshot> sixtySnapshots;
+    Stream<QuerySnapshot> endlessSnapshots;
+    tenSnapshots = _firestore
+        .collection('scores')
+        .orderBy('score', descending: true)
+        .snapshots();
+
+    tenSnapshots.listen((snapshot) {
+      final docs = snapshot.docs;
+      for (var scores in docs) {
+        final nickName = scores.data()['name'];
+        print(nickName);
+        if (name == nickName) {
+          tenTapNumber = scores.data()['score'].toString();
+        }
+      }
+    });
+
+    sixtySnapshots = _firestore
+        .collection('sixtyScores')
+        .orderBy('score', descending: true)
+        .snapshots();
+
+    sixtySnapshots.listen((snapshot) {
+      final docs = snapshot.docs;
+      for (var scores in docs) {
+        final nickName = scores.data()['name'];
+        if (name == nickName) {
+          sixtyTapNumber = scores.data()['score'].toString();
+        }
+      }
+    });
+
+    endlessSnapshots = _firestore
+        .collection('endlessScores')
+        .orderBy('score', descending: true)
+        .snapshots();
+
+    endlessSnapshots.listen((snapshot) {
+      final docs = snapshot.docs;
+      for (var scores in docs) {
+        final nickName = scores.data()['name'];
+        if (name == nickName) {
+          endlessTapNumber = scores.data()['score'].toString();
+        } 
+      }
+    });
+
+
   }
 
-  Future<void> getPrefItems() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    endlessTapNumber = (prefs.getInt('counter') ?? 0).toString();
-  }
+
+  // Future<void> setPrefItems() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('counter', int.parse(endlessTapNumber));
+  // }
+  //
+  // Future<void> getPrefItems() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   endlessTapNumber = (prefs.getInt('counter') ?? 0).toString();
+  // }
 
   Future<void> setName(String nickName) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -170,7 +185,5 @@ class SelectTimes extends ChangeNotifier {
     this.nickName = prefs.getString('name') ?? '';
     notifyListeners();
   }
-
-
 }
 // }

@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                     offset: model.nickName?.length ?? 0),
               ),
             );
-            model.getPrefItems();
+            //model.getPrefItems();
             nickName = model.nickName;
             return Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -72,6 +72,7 @@ class HomeScreen extends StatelessWidget {
                       nickName = value;
                       model.nickName = value;
                       model.updateDisplay();
+                      model.fetchScore(model.nickName);
                     },
                     decoration: InputDecoration(
                       fillColor: Colors.white,
@@ -102,6 +103,7 @@ class HomeScreen extends StatelessWidget {
                                 child: SelectedCard(
                                   onPress: () {
                                     model.selectTenNumber();
+                                    model.fetchName();
                                   },
                                   width: model.selectCard == Select.tenSeconds
                                       ? kActiveBorderWidth
@@ -213,7 +215,7 @@ class HomeScreen extends StatelessWidget {
                             if (model.selectCard == Select.endless) {
                               model.updateResult(
                                   result.endelessTapNumber.toString());
-                              model.setPrefItems();
+                              //model.setPrefItems();
                             } else {
                               model.updateResult(result.tapNumber.toString());
                             }
