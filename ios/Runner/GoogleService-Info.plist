@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>63011073345-cn7tkvs2v074iu0h0pkup1pc9fjf657s.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.63011073345-cn7tkvs2v074iu0h0pkup1pc9fjf657s</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBA7U1cfLM32vJWkVveN6CT2TcK6UrszJk</string>
+	<key>GCM_SENDER_ID</key>
+	<string>63011073345</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.rendaMachine</string>
+	<key>PROJECT_ID</key>
+	<string>renda-fbc0b</string>
+	<key>STORAGE_BUCKET</key>
+	<string>renda-fbc0b.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:63011073345:ios:fff5d9b0a63158c9d705c0</string>
+</dict>
+</plist>

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "63011073345",
+    "project_id": "renda-fbc0b",
+    "storage_bucket": "renda-fbc0b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:63011073345:android:2fa56c051d2517fbd705c0",
+        "android_client_info": {
+          "package_name": "com.example.renda_machine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "63011073345-cg8u75c1v6r46kt1c63ddknrv2vcoi3i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcIvW1DNAHj_i5zPQN2Umr5G_b8rPFZHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "63011073345-cg8u75c1v6r46kt1c63ddknrv2vcoi3i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "63011073345-cn7tkvs2v074iu0h0pkup1pc9fjf657s.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rendaMachine"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
