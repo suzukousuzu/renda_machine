@@ -10,8 +10,8 @@ class TestScreenModel extends ChangeNotifier {
   int tapNumber = -1;
 
   int kEndlessTapNumber;
-  double tenRemainingSeconds = 10.00;
-  String tenDisplaySeconds = "10.00";
+  double tenRemainingSeconds = 00.00;
+  String tenDisplaySeconds = "00.00";
   double sixtyRemainingSeconds = 60.00;
   String sixtyDisplaySeconds = "60.00";
   bool isTimeUp = false;
@@ -48,9 +48,9 @@ class TestScreenModel extends ChangeNotifier {
   }
 
   void _onTenTimer(Timer timer) {
-    tenRemainingSeconds -= 0.01;
+    tenRemainingSeconds += 0.01;
     tenDisplaySeconds = tenRemainingSeconds.toStringAsFixed(2);
-    if (tenRemainingSeconds <= 0) {
+    if (tenRemainingSeconds > 10) {
       timer.cancel();
       tenDisplaySeconds = "10.00";
       isTimeUp = true;
@@ -59,9 +59,9 @@ class TestScreenModel extends ChangeNotifier {
   }
 
   void _onSixtyTimer(Timer timer) {
-    sixtyRemainingSeconds -= 0.01;
+    sixtyRemainingSeconds += 0.01;
     sixtyDisplaySeconds = sixtyRemainingSeconds.toStringAsFixed(2);
-    if (sixtyRemainingSeconds <= 0) {
+    if (sixtyRemainingSeconds > 60) {
       timer.cancel();
       sixtyDisplaySeconds = "60.00";
       isTimeUp = true;
