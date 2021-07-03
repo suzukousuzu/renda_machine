@@ -74,16 +74,19 @@ class TestScreenModel extends ChangeNotifier {
       await FirebaseFirestore.instance
           .collection('scores')
           .add({'name': nickName, 'score': tapNumber});
+      notifyListeners();
     } else if (select == Select.sixtySeconds) {
       await FirebaseFirestore.instance
           .collection('sixtyScores')
           .add({'name': nickName, 'score': tapNumber});
+      notifyListeners();
     } else if (select == Select.endless) {
       await FirebaseFirestore.instance
           .collection('endlessScores')
-          .add({'name': nickName, 'score': tapNumber});
+          .add({'name': nickName, 'score': kEndlessTapNumber});
+        notifyListeners();
     }
-    notifyListeners();
+
   }
 
   Future <void> setPrefItems() async {

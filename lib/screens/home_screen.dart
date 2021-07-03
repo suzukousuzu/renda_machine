@@ -30,6 +30,7 @@ class HomeScreen extends StatelessWidget {
             fit: BoxFit.cover,
           )),
           child: Consumer<SelectTimes>(builder: (context, model, child) {
+            model.fetchScore();
             final _controller = TextEditingController.fromValue(
               TextEditingValue(
                 text: model.nickName ?? "",
@@ -70,9 +71,9 @@ class HomeScreen extends StatelessWidget {
                     controller: _controller,
                     onChanged: (value) {
                       nickName = value;
-                      model.nickName = value;
+                      model.updateNickName(nickName);
                       model.updateDisplay();
-                      model.fetchScore(model.nickName);
+                      model.fetchScore();
                     },
                     decoration: InputDecoration(
                       fillColor: Colors.white,

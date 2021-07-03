@@ -92,12 +92,10 @@ class SelectTimes extends ChangeNotifier {
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         final tapScore = scores.data()['score'];
-        print(nickName);
         if (nickName != null) {
           if (nickName != "") {
             if (indexNumber <= 4) {
               indexNumber += 1;
-              print(indexNumber);
               final scoreBunddle = ScoreBunddle(
                 nickName: nickName,
                 score: tapScore,
@@ -112,7 +110,7 @@ class SelectTimes extends ChangeNotifier {
     notifyListeners();
   }
 
-  void fetchScore(String name) {
+  void fetchScore() {
     Stream<QuerySnapshot> tenSnapshots;
     Stream<QuerySnapshot> sixtySnapshots;
     Stream<QuerySnapshot> endlessSnapshots;
@@ -122,18 +120,20 @@ class SelectTimes extends ChangeNotifier {
         .snapshots();
 
     tenSnapshots.listen((snapshot) {
+
       tenTapNumber = "0";
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
-        print(nickName);
-        if (name == nickName) {
+        if (this.nickName == nickName) {
           int kTenTapNumber = scores.data()['score'];
           if (kTenTapNumber > int.parse(tenTapNumber)) {
             tenTapNumber = kTenTapNumber.toString();
+
           }
         }
       }
+      notifyListeners();
     });
 
     sixtySnapshots = _firestore
@@ -146,13 +146,14 @@ class SelectTimes extends ChangeNotifier {
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
-        if (name == nickName) {
+        if (this.nickName == nickName) {
           int kSixtyTapNumber = scores.data()['score'];
           if (kSixtyTapNumber > int.parse(sixtyTapNumber)) {
             sixtyTapNumber = kSixtyTapNumber.toString();
           }
         }
       }
+      notifyListeners();
     });
 
     endlessSnapshots = _firestore
@@ -165,14 +166,21 @@ class SelectTimes extends ChangeNotifier {
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
-        if (name == nickName) {
+        if (this.nickName == nickName) {
           int kEndlessTapNumber = scores.data()['score'];
           if (kEndlessTapNumber > int.parse(endlessTapNumber)) {
             endlessTapNumber = kEndlessTapNumber.toString();
           }
+
         }
       }
+      notifyListeners();
     });
+  }
+
+  void updateNickName(String name) {
+    this.nickName = name;
+    notifyListeners();
   }
 
   // Future<void> setPrefItems() async {
