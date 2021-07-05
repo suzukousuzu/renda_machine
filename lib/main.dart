@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: "連打マシーン",
       theme: ThemeData(fontFamily: "SourceSansPro"),
       home: HomeScreen(),
