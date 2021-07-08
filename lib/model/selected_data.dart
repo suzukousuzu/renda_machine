@@ -23,6 +23,7 @@ class SelectTimes extends ChangeNotifier {
   int indexNumber = 0;
   String nickName;
   bool buttonDisplay = true;
+  bool isUpdate = false;
 
   void selectTenNumber() {
     selectCard = Select.tenSeconds;
@@ -114,18 +115,19 @@ class SelectTimes extends ChangeNotifier {
     Stream<QuerySnapshot> tenSnapshots;
     Stream<QuerySnapshot> sixtySnapshots;
     Stream<QuerySnapshot> endlessSnapshots;
+    isUpdate = false;
     tenSnapshots = _firestore
         .collection('scores')
         .orderBy('score', descending: true)
         .snapshots();
 
     tenSnapshots.listen((snapshot) {
-
       tenTapNumber = "0";
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (this.nickName == nickName) {
+          isUpdate = true;
           int kTenTapNumber = scores.data()['score'];
           if (kTenTapNumber > int.parse(tenTapNumber)) {
             tenTapNumber = kTenTapNumber.toString();
@@ -147,6 +149,7 @@ class SelectTimes extends ChangeNotifier {
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (this.nickName == nickName) {
+          isUpdate = true;
           int kSixtyTapNumber = scores.data()['score'];
           if (kSixtyTapNumber > int.parse(sixtyTapNumber)) {
             sixtyTapNumber = kSixtyTapNumber.toString();
@@ -167,6 +170,7 @@ class SelectTimes extends ChangeNotifier {
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (this.nickName == nickName) {
+          isUpdate = true;
           int kEndlessTapNumber = scores.data()['score'];
           if (kEndlessTapNumber > int.parse(endlessTapNumber)) {
             endlessTapNumber = kEndlessTapNumber.toString();

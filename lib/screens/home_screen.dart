@@ -47,7 +47,6 @@ class HomeScreen extends StatelessWidget {
                   tenTapNumber: model.tenTapNumber,
                   sixtyTapNumber: model.sixtyTapNumber,
                   endlessTapNumber: model.endlessTapNumber,
-
                 ),
                 SizedBox(
                   height: 20.0,
@@ -194,6 +193,7 @@ class HomeScreen extends StatelessWidget {
                                             endlessTapNumber: int.parse(
                                                 model.endlessTapNumber),
                                             nickName: model.nickName,
+                                            isUpdate: model.isUpdate,
                                           )));
                             } else if (model.selectCard == Select.endless) {
                               result = await Navigator.push(
@@ -203,6 +203,7 @@ class HomeScreen extends StatelessWidget {
                                             selectedCard: model.selectCard,
                                             endlessTapNumber: 0,
                                             nickName: model.nickName,
+                                            isUpdate: model.isUpdate,
                                           )));
                             } else {
                               result = await Navigator.push(
@@ -211,6 +212,7 @@ class HomeScreen extends StatelessWidget {
                                       builder: (context) => TestScreen(
                                             selectedCard: model.selectCard,
                                             nickName: model.nickName,
+                                            isUpdate: model.isUpdate,
                                           )));
                             }
                             if (model.selectCard == Select.endless) {
@@ -240,24 +242,105 @@ class HomeScreen extends StatelessWidget {
                     Expanded(
                       child: Column(
                         children: [
-                          Container(width:double.infinity,child: Text("SOUND EFFECT:",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          Container(width:double.infinity,child: Text("----------",textAlign: TextAlign.left,style:leadersBoardText ,)),
-                          SizedBox(height: 15.0,),
-                          Container(width:double.infinity,child: Text("Font:",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          Container(width:double.infinity,child: Text("SourceSansPro",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          Container(width:double.infinity,child: Text("Pacifico",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          SizedBox(height: 15.0,),
-                          Container(width:double.infinity,child: Text("CON:",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          Container(width:double.infinity,child: Text("KOTA",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          SizedBox(height: 15.0,),
-                          Container(width:double.infinity,child: Text("BACKGROUND:",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          Container(width:double.infinity,child: Text("BLACKHOLE",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          SizedBox(height: 15.0,),
-                          Container(width:double.infinity,child: Text("SPECIAL THANKS:",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          Container(width:double.infinity,child: Text("KOTA SUZUKI",textAlign: TextAlign.left,style: leadersBoardText,)),
-                          SizedBox(height: 15.0,),
-                          Container(width:double.infinity,child: Text("(c)2019 KotaSuzuki Inc.",textAlign: TextAlign.left,style: leadersBoardText,))
-
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "SOUND EFFECT:",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "----------",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "Font:",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "SourceSansPro",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "Pacifico",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "CON:",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "KOTA",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "BACKGROUND:",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "BLACKHOLE",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "SPECIAL THANKS:",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "KOTA SUZUKI",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              )),
+                          SizedBox(
+                            height: 15.0,
+                          ),
+                          Container(
+                              width: double.infinity,
+                              child: Text(
+                                "(c)2019 KotaSuzuki Inc.",
+                                textAlign: TextAlign.left,
+                                style: leadersBoardText,
+                              ))
                         ],
                       ),
                     ),

@@ -20,6 +20,7 @@ class TestScreenModel extends ChangeNotifier {
   final _firestore = FirebaseFirestore.instance;
   String nickName;
 
+
   void updateTapNumner() {
     // if (tapNumber == 0) {
     //   repeatedTimer();
@@ -69,22 +70,19 @@ class TestScreenModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future addScore(String nickName, Select select) async {
+  void addScore(String nickName, Select select)  async{
     if (select == Select.tenSeconds) {
-      await FirebaseFirestore.instance
+       await FirebaseFirestore.instance
           .collection('scores')
           .add({'name': nickName, 'score': tapNumber});
-      notifyListeners();
     } else if (select == Select.sixtySeconds) {
-      await FirebaseFirestore.instance
+       await FirebaseFirestore.instance
           .collection('sixtyScores')
           .add({'name': nickName, 'score': tapNumber});
-      notifyListeners();
     } else if (select == Select.endless) {
-      await FirebaseFirestore.instance
+       await FirebaseFirestore.instance
           .collection('endlessScores')
           .add({'name': nickName, 'score': kEndlessTapNumber});
-        notifyListeners();
     }
 
   }
@@ -98,6 +96,89 @@ class TestScreenModel extends ChangeNotifier {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       kEndlessTapNumber = (prefs.getInt('counter') ?? 0);
 
+  }
+
+
+  void updateScore(String name, Select select) {
+    Stream<QuerySnapshot> tenSeconds;
+    Stream<QuerySnapshot> sixtySeconds;
+    Stream<QuerySnapshot> endless;
+
+    if (select == Select.tenSeconds) {
+      tenSeconds = _firestore
+          .collection('scores')
+          .orderBy('score', descending: true)
+          .snapshots();
+
+      tenSeconds.listen((snapshot) {
+        final docs = snapshot.docs;
+        for (var scores in docs) {
+          final nickName = scores.data()['name'];
+          final score = scores.data()['score'];
+          final documentId = scores.id;
+          if (nickName == name) {
+            if (score < tapNumber) {
+              FirebaseFirestore.instance
+                  .collection('scores')
+                  .doc(documentId)
+                  .update({"score": tapNumber});
+
+              notifyListeners();
+            }
+          }
+        }
+      });
+    }
+
+    if (select == Select.sixtySeconds) {
+      sixtySeconds = _firestore
+          .collection('sixtyScores')
+          .orderBy('score', descending: true)
+          .snapshots();
+
+      sixtySeconds.listen((snapshot) {
+        final docs = snapshot.docs;
+        for (var scores in docs) {
+          final nickName = scores.data()['name'];
+          final score = scores.data()['score'];
+          final documentId = scores.id;
+          if (nickName == name) {
+            if (score < tapNumber) {
+              FirebaseFirestore.instance
+                  .collection('sixtyScores')
+                  .doc(documentId)
+                  .update({"score": tapNumber});
+              notifyListeners();
+            }
+          }
+        }
+      });
+    }
+
+    if (select == Select.endless) {
+      endless = _firestore
+          .collection('endlessScores')
+          .orderBy('score', descending: true)
+          .snapshots();
+
+      endless.listen((snapshot) {
+        final docs = snapshot.docs;
+        for (var scores in docs) {
+          final nickName = scores.data()['name'];
+          final score = scores.data()['score'];
+          final documentId = scores.id;
+          if (nickName == name) {
+            if (score < tapNumber) {
+              FirebaseFirestore.instance
+                  .collection('endlessScores')
+                  .doc(documentId)
+                  .update({"score": tapNumber});
+              notifyListeners();
+            }
+          }
+        }
+      });
+    }
   }
 
 

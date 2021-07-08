@@ -13,11 +13,11 @@ class ScoreBunddle extends StatelessWidget {
     return Row(
       children: [
         Text(
-          indexNumber.toString(),
+          indexNumber.toString() + ".",
           style: leadersBoardText,
         ),
         Text(
-          nickName,
+          nickName + ":",
           style: leadersBoardText,
         ),
         Text(

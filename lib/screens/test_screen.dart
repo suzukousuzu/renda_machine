@@ -10,16 +10,16 @@ import 'package:renda_machine/entity/view_to_arguments.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class TestScreen extends StatelessWidget {
-  TestScreen({this.selectedCard, this.endlessTapNumber, this.nickName});
+  TestScreen({this.selectedCard, this.endlessTapNumber, this.nickName,this.isUpdate});
 
   final Select selectedCard;
   int endlessTapNumber;
   String nickName;
+  final bool isUpdate;
+
 
   @override
   Widget build(BuildContext context) {
-
-
     //Timer timer;
     return ChangeNotifierProvider(
       create: (context) => TestScreenModel()..getPrefItems(),
@@ -69,17 +69,25 @@ class TestScreen extends StatelessWidget {
                         })(),
                       ),
                       Expanded(
-                        child: SelectedCard(
+                        child: SelectedCard (
                           onPress: () {
                             //timer.cancel();
                             if (model.isTimeUp ||
                                 selectedCard == Select.tenSeconds ||
                                 selectedCard == Select.sixtySeconds) {
-                              Navigator.pop(context, ViewAToBArguments(tapNumber: model.tapNumber,NickName: nickName));
-                              model.addScore(nickName, selectedCard);
+                              Navigator.pop (
+                                  context,
+                                  ViewAToBArguments(
+                                      tapNumber: model.tapNumber,
+                                      NickName: nickName));
+
+                              isUpdate ? model.updateScore(nickName, selectedCard) :  model.addScore(nickName,selectedCard);
                             } else if (selectedCard == Select.endless) {
-                              Navigator.pop(context,
-                                  ViewAToBArguments(endelessTapNumber:endlessTapNumber, NickName:nickName));
+                              Navigator.pop(
+                                  context,
+                                  ViewAToBArguments(
+                                      endelessTapNumber: endlessTapNumber,
+                                      NickName: nickName));
                               model.addScore(nickName, selectedCard);
                               model.setPrefItems();
                             } else {
@@ -163,8 +171,9 @@ class TestScreen extends StatelessWidget {
                               if (selectedCard == Select.endless) {
                                 model.isTimeUp
                                     ? null
-                                    : endlessTapNumber = model.updateEndlessTapNumber(
-                                    endlessTapNumber);
+                                    : endlessTapNumber =
+                                        model.updateEndlessTapNumber(
+                                            endlessTapNumber);
                               }
                             });
                           }))
@@ -176,5 +185,4 @@ class TestScreen extends StatelessWidget {
       ),
     );
   }
-
 }
