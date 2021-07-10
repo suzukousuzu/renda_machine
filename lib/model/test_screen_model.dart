@@ -123,7 +123,6 @@ class TestScreenModel extends ChangeNotifier {
                   .doc(documentId)
                   .update({"score": tapNumber});
 
-              notifyListeners();
             }
           }
         }
@@ -148,7 +147,6 @@ class TestScreenModel extends ChangeNotifier {
                   .collection('sixtyScores')
                   .doc(documentId)
                   .update({"score": tapNumber});
-              notifyListeners();
             }
           }
         }
@@ -173,12 +171,12 @@ class TestScreenModel extends ChangeNotifier {
                   .collection('endlessScores')
                   .doc(documentId)
                   .update({"score": tapNumber});
-              notifyListeners();
             }
           }
         }
       });
     }
+    notifyListeners();
   }
 
 

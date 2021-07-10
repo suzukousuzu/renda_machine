@@ -195,6 +195,7 @@ class HomeScreen extends StatelessWidget {
                                             nickName: model.nickName,
                                             isUpdate: model.isUpdate,
                                           )));
+                              model.fetchName();
                             } else if (model.selectCard == Select.endless) {
                               result = await Navigator.push(
                                   context,
@@ -205,6 +206,7 @@ class HomeScreen extends StatelessWidget {
                                             nickName: model.nickName,
                                             isUpdate: model.isUpdate,
                                           )));
+                              model.fetchName();
                             } else {
                               result = await Navigator.push(
                                   context,
@@ -214,6 +216,7 @@ class HomeScreen extends StatelessWidget {
                                             nickName: model.nickName,
                                             isUpdate: model.isUpdate,
                                           )));
+                              model.fetchName();
                             }
                             if (model.selectCard == Select.endless) {
                               model.updateResult(

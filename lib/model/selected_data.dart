@@ -44,17 +44,19 @@ class SelectTimes extends ChangeNotifier {
     if (selectCard == Select.tenSeconds) {
       if (int.parse(result) > int.parse(tenTapNumber)) {
         tenTapNumber = result;
+        notifyListeners();
       }
     } else if (selectCard == Select.sixtySeconds) {
       if (int.parse(result) > int.parse(sixtyTapNumber)) {
         sixtyTapNumber = result;
+        notifyListeners();
       }
     } else {
       if (int.parse(result) > int.parse(endlessTapNumber)) {
         endlessTapNumber = result;
+        notifyListeners();
       }
     }
-    notifyListeners();
   }
 
   void updateDisplay() {
@@ -131,11 +133,11 @@ class SelectTimes extends ChangeNotifier {
           int kTenTapNumber = scores.data()['score'];
           if (kTenTapNumber > int.parse(tenTapNumber)) {
             tenTapNumber = kTenTapNumber.toString();
+            notifyListeners();
 
           }
         }
       }
-      notifyListeners();
     });
 
     sixtySnapshots = _firestore
@@ -153,10 +155,10 @@ class SelectTimes extends ChangeNotifier {
           int kSixtyTapNumber = scores.data()['score'];
           if (kSixtyTapNumber > int.parse(sixtyTapNumber)) {
             sixtyTapNumber = kSixtyTapNumber.toString();
+            notifyListeners();
           }
         }
       }
-      notifyListeners();
     });
 
     endlessSnapshots = _firestore
@@ -174,11 +176,11 @@ class SelectTimes extends ChangeNotifier {
           int kEndlessTapNumber = scores.data()['score'];
           if (kEndlessTapNumber > int.parse(endlessTapNumber)) {
             endlessTapNumber = kEndlessTapNumber.toString();
+            notifyListeners();
           }
 
         }
       }
-      notifyListeners();
     });
   }
 

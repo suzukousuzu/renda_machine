@@ -88,7 +88,7 @@ class TestScreen extends StatelessWidget {
                                   ViewAToBArguments(
                                       endelessTapNumber: endlessTapNumber,
                                       NickName: nickName));
-                              model.addScore(nickName, selectedCard);
+                              isUpdate ? model.updateScore(nickName, selectedCard) :  model.addScore(nickName,selectedCard);
                               model.setPrefItems();
                             } else {
                               Navigator.pop(context, "");
@@ -150,7 +150,7 @@ class TestScreen extends StatelessWidget {
                       ? Container(
                           child: Text(
                           "TimeUp!!",
-                          style: kTextStyle,
+                          style: kTestTextStyle,
                         ))
                       : Container(child: Text(" ")),
                   model.isTimeUp
