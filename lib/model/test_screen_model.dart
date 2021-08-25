@@ -12,8 +12,8 @@ class TestScreenModel extends ChangeNotifier {
   int kEndlessTapNumber;
   double tenRemainingSeconds = 00.00;
   String tenDisplaySeconds = "00.00";
-  double sixtyRemainingSeconds = 60.00;
-  String sixtyDisplaySeconds = "60.00";
+  double sixtyRemainingSeconds = 00.00;
+  String sixtyDisplaySeconds = "00.00";
   bool isTimeUp = false;
   bool isStart = false;
   bool isEndless = false;
@@ -166,11 +166,11 @@ class TestScreenModel extends ChangeNotifier {
           final score = scores.data()['score'];
           final documentId = scores.id;
           if (nickName == name) {
-            if (score < tapNumber) {
+            if (score < kEndlessTapNumber) {
               FirebaseFirestore.instance
                   .collection('endlessScores')
                   .doc(documentId)
-                  .update({"score": tapNumber});
+                  .update({"score": kEndlessTapNumber});
             }
           }
         }

@@ -90,11 +90,15 @@ class SelectTimes extends ChangeNotifier {
     }
 
     snapshots.listen((snapshot) {
+      isUpdate = false;
       indexNumber = 0;
       final docs = snapshot.docs;
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         final tapScore = scores.data()['score'];
+        if(this.nickName == nickName) {
+          isUpdate = true;
+        }
         if (nickName != null) {
           if (nickName != "") {
             if (indexNumber <= 4) {
@@ -117,7 +121,7 @@ class SelectTimes extends ChangeNotifier {
     Stream<QuerySnapshot> tenSnapshots;
     Stream<QuerySnapshot> sixtySnapshots;
     Stream<QuerySnapshot> endlessSnapshots;
-    isUpdate = false;
+
     tenSnapshots = _firestore
         .collection('scores')
         .orderBy('score', descending: true)
@@ -129,7 +133,7 @@ class SelectTimes extends ChangeNotifier {
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (this.nickName == nickName) {
-          isUpdate = true;
+
           int kTenTapNumber = scores.data()['score'];
           if (kTenTapNumber > int.parse(tenTapNumber)) {
             tenTapNumber = kTenTapNumber.toString();
@@ -151,7 +155,6 @@ class SelectTimes extends ChangeNotifier {
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (this.nickName == nickName) {
-          isUpdate = true;
           int kSixtyTapNumber = scores.data()['score'];
           if (kSixtyTapNumber > int.parse(sixtyTapNumber)) {
             sixtyTapNumber = kSixtyTapNumber.toString();
@@ -172,7 +175,6 @@ class SelectTimes extends ChangeNotifier {
       for (var scores in docs) {
         final nickName = scores.data()['name'];
         if (this.nickName == nickName) {
-          isUpdate = true;
           int kEndlessTapNumber = scores.data()['score'];
           if (kEndlessTapNumber > int.parse(endlessTapNumber)) {
             endlessTapNumber = kEndlessTapNumber.toString();
